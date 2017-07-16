@@ -71,7 +71,11 @@ class CarsController extends Controller
      */
     public function show($id)
     {
-        //
+        if(empty($car = $this->carRepository->getById($id))) {
+            return abort(404);
+        }
+
+        return view('cars.show')->withCar($car);
     }
 
     /**
