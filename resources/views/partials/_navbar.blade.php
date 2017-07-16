@@ -12,8 +12,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ route('cars.index') }}">Cars list</a></li>
-                <li><a href="{{ route('cars.create') }}">Add</a></li>
+                <li class="{{ Request::is('cars') ? "active" : ""}}"><a href="{{ route('cars.index') }}">Cars list</a></li>
+                <li class="{{ Request::is('cars/create') ? "active" : ""}}"><a href="{{ route('cars.create') }}">Add</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

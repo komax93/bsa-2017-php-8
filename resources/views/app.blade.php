@@ -13,7 +13,6 @@
     @yield('content')
 
 </div>
-<!-- /container -->
 
 @include('partials._scripts')
 
