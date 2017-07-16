@@ -7,6 +7,10 @@ use App\Entities\Car;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCarRequest;
 
+/**
+ * Class CarsController
+ * @package App\Http\Controllers
+ */
 class CarsController extends Controller
 {
     /**
@@ -78,7 +82,7 @@ class CarsController extends Controller
      */
     public function show($id)
     {
-        if(empty($car = $this->carRepository->getById($id))) {
+        if (empty($car = $this->carRepository->getById($id))) {
             return abort(404);
         }
 
@@ -93,7 +97,7 @@ class CarsController extends Controller
      */
     public function edit($id)
     {
-        if(empty($car = $this->carRepository->getById($id))) {
+        if (empty($car = $this->carRepository->getById($id))) {
             return abort(404);
         }
 
@@ -108,7 +112,7 @@ class CarsController extends Controller
      */
     public function update(StoreCarRequest $request, $id)
     {
-        if(empty($carArray = $this->carRepository->getById($id)->toArray())) {
+        if (empty($carArray = $this->carRepository->getById($id)->toArray())) {
             return abort(404);
         }
 

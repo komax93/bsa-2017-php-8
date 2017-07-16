@@ -4,6 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class StoreCarRequest
+ * @package App\Http\Requests
+ */
 class StoreCarRequest extends FormRequest
 {
     /**
@@ -11,7 +15,7 @@ class StoreCarRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         return true;
     }
@@ -21,7 +25,7 @@ class StoreCarRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             "model" => "required|max:255",

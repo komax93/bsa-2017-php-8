@@ -15,4 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::resource('cars', 'CarsController');
+Route::resource('cars', 'CarsController', ['except' => ['destroy']]);
