@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\CarRepository;
 use App\Entities\Car;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreCarRequest;
 
 class CarsController extends Controller
 {
@@ -55,12 +56,18 @@ class CarsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreCarRequest $request
+     * @return mixed
      */
-    public function store(Request $request)
+    public function store(StoreCarRequest $request)
     {
-        //
+        $result = $request->all();
+
+        $this->carRepository->store(new Car($result));
+
+        $cars = $this->carRepository->getAll()->toArray();
+
+        return view("cars.index")->withCars($cars);
     }
 
     /**

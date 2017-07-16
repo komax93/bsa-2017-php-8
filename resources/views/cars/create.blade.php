@@ -8,11 +8,18 @@
         <p>In this page, you can add a new car.</p>
     </div>
 
-    <form action="{{ route('cars.store') }}" class="form-horizontal">
+    <form method="post" action="{{ route('cars.store') }}" class="form-horizontal">
+        {{ csrf_field() }}
         <div class="form-group">
-            <label for="reg_number" class="col-sm-2 control-label">Registration Number</label>
+            <label for="model" class="col-sm-2 control-label">Model</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="reg_number" name="reg_number" value="{{ old('registration_number') }}">
+                <input type="text" class="form-control" id="model" name="model" value="{{ old('model') }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="registration_number" class="col-sm-2 control-label">Registration Number</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="registration_number" name="registration_number" value="{{ old('registration_number') }}">
             </div>
         </div>
         <div class="form-group">
@@ -39,4 +46,6 @@
             </div>
         </div>
     </form>
+
+    @include("partials._messages")
 @endsection
