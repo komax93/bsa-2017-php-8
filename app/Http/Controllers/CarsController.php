@@ -2,10 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\CarRepository;
+use App\Entities\Car;
 use Illuminate\Http\Request;
 
 class CarsController extends Controller
 {
+    /**
+     * @var CarRepository
+     */
+    private $carRepository;
+
+    /**
+     * CarsController constructor.
+     *
+     * @param CarRepository $carRepository
+     */
+    public function __construct(CarRepository $carRepository)
+    {
+        $this->carRepository = $carRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +30,16 @@ class CarsController extends Controller
      */
     public function index()
     {
-        return view('cars.index');
+        $cars = $this->carRepository->getAll()->map(function (Car $car) {
+            return [
+                'id' => $car->getId(),
+                'model' => $car->getModel(),
+                'color' => $car->getColor(),
+                'price' => $car->getPrice()
+            ];
+        });
+
+        return view('cars.index')->withCars($cars);
     }
 
     /**
