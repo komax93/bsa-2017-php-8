@@ -93,19 +93,34 @@ class CarsController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(empty($car = $this->carRepository->getById($id))) {
+            return abort(404);
+        }
+
+        return view('cars.edit')->withCar($car);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param StoreCarRequest $request
+     * @param $id
      */
-    public function update(Request $request, $id)
+    public function update(StoreCarRequest $request, $id)
     {
-        //
+        if(empty($carArray = $this->carRepository->getById($id)->toArray())) {
+            return abort(404);
+        }
+
+        $requestArray = $request->toArray();
+        foreach ($requestArray as $key => $value) {
+            $carArray[$key] = $value;
+        }
+
+        $this->carRepository->update(new Car($carArray));
+        $car = $this->carRepository->getById($id);
+
+        return view('cars.show')->withCar($car);
     }
 
     /**
