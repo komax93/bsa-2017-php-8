@@ -112,11 +112,12 @@ class CarsController extends Controller
      */
     public function update(StoreCarRequest $request, $id)
     {
-        if (empty($carArray = $this->carRepository->getById($id)->toArray())) {
+        if (empty($carItem = $this->carRepository->getById($id))) {
             return abort(404);
         }
 
         $requestArray = $request->toArray();
+        $carArray = $carItem->toArray();
         foreach ($requestArray as $key => $value) {
             $carArray[$key] = $value;
         }
